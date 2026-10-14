@@ -1,301 +1,131 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para Ariel y Maria ❤️</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      font-family: 'Outfit', sans-serif;
-      background-color: #0d020a;
-      color: #ffffff;
-      overflow-x: hidden;
-      user-select: none;
-    }
-    .font-dancing {
-      font-family: 'Dancing Script', cursive;
-    }
-    .glow-text {
-      text-shadow: 0 0 20px rgba(255, 42, 117, 0.6);
-    }
-    .glass-card {
-      background: rgba(20, 5, 15, 0.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 42, 117, 0.3);
-      box-shadow: 0 0 40px rgba(255, 42, 117, 0.15);
-    }
-    .tab-content {
-      display: none;
-    }
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.4s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes float {
-      0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
-      50% { opacity: 0.8; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-    }
-    .heart-particle {
-      position: fixed;
-      color: rgba(255, 42, 117, 0.4);
-      pointer-events: none;
-      animation: float 6s linear infinite;
-      z-index: 0;
-    }
-  </style>
-</head>
-<body class="min-h-screen relative flex flex-col justify-between p-4 md:p-8 pb-24" onclick="iniciarAudioAutomatico()">
-
-  <div id="particles"></div>
-
-  <!-- Botón de Música Flotante -->
-  <button id="musicToggle" onclick="toggleMusic(event)" class="fixed top-4 right-4 z-50 glass-card px-4 py-2 rounded-full flex items-center gap-2 text-pink-400 hover:text-white transition shadow-lg cursor-pointer">
-    <i id="musicIcon" class="fa-solid fa-music"></i>
-    <span id="musicText" class="text-xs font-semibold">Toca para Música 🎵</span>
-  </button>
-  
-  <!-- Audio Directo Servidor Global (Cigarettes After Sex - K. Instrumental) -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="https://files.catbox.moe/5u6z2o.mp3" type="audio/mp3">
-  </audio>
-
-  <!-- Encabezado -->
-  <header class="text-center z-10 mt-2 mb-4">
-    <h1 class="text-4xl md:text-5xl font-dancing font-bold text-pink-500 glow-text">Ariel & Maria</h1>
-    <p class="text-xs text-pink-300">Nuestra Historia de Amor</p>
-  </header>
-
-  <!-- Contenedor Principal -->
-  <main class="w-full max-w-xl mx-auto z-10 my-auto">
-
-    <!-- 1. INICIO -->
-    <div id="sec-inicio" class="tab-content active text-center">
-      <div class="glass-card p-8 rounded-3xl space-y-6">
-        <div class="text-pink-500 text-6xl animate-bounce">
-          <i class="fa-solid fa-heart-pulse"></i>
-        </div>
-        <h2 class="text-2xl font-dancing font-bold text-pink-400">¡Hola, mi Awina Preciosa! ❤️</h2>
-        <p class="text-gray-300 text-sm leading-relaxed">
-          Bienvenida a nuestro pequeño rincón en el universo. Hice esto especialmente para ti para recordarte lo infinitamente importante que eres en mi vida.
-        </p>
-        <div class="bg-pink-950/40 p-4 rounded-2xl border border-pink-500/30">
-          <p class="text-xs text-pink-300 mb-1">Tiempo juntos desde el 30.06.2024:</p>
-          <div id="counter" class="text-sm font-semibold text-white">Calculando...</div>
-        </div>
-        <button onclick="showTab('recuerdos')" class="bg-gradient-to-r from-pink-600 to-rose-500 text-white px-6 py-2.5 rounded-full text-sm font-medium shadow-lg hover:scale-105 transition">
-          Ver nuestros recuerdos <i class="fa-solid fa-arrow-right ml-1"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- 2. GALERÍA DE RECUERDOS (JFIF, JPG & PNG) -->
-    <div id="sec-recuerdos" class="tab-content">
-      <div class="glass-card p-6 rounded-3xl space-y-6 text-center">
-        <h2 class="text-2xl font-dancing font-bold text-pink-400"><i class="fa-solid fa-camera-retro"></i> Nuestros Recuerdos</h2>
-        
-        <div class="grid grid-cols-2 gap-3 max-h-96 overflow-y-auto pr-1">
-          <div class="glass-card p-2 rounded-2xl transform -rotate-1 hover:rotate-0 transition">
-            <img src="image_321cd7.jpg" onerror="this.onerror=null; this.src='image_321cd7.jfif';" alt="Foto 1" class="w-full h-36 object-cover rounded-xl">
-            <p class="font-dancing text-pink-300 text-xs mt-1">Mi persona favorita ❤️</p>
-          </div>
-          <div class="glass-card p-2 rounded-2xl transform rotate-1 hover:rotate-0 transition">
-            <img src="image_321cf5.jpg" onerror="this.onerror=null; this.src='image_321cf5.jfif';" alt="Foto 2" class="w-full h-36 object-cover rounded-xl">
-            <p class="font-dancing text-pink-300 text-xs mt-1">Cómplices de todo ✨</p>
-          </div>
-          <div class="glass-card p-2 rounded-2xl transform rotate-2 hover:rotate-0 transition">
-            <img src="image_3ec474.jpg" onerror="this.onerror=null; this.src='image_3ec474.jfif';" alt="Foto 3" class="w-full h-36 object-cover rounded-xl">
-            <p class="font-dancing text-pink-300 text-xs mt-1">Nuestras cenas juntos 🍕</p>
-          </div>
-          <div class="glass-card p-2 rounded-2xl transform -rotate-2 hover:rotate-0 transition">
-            <img src="image_5a9583.jpg" onerror="this.onerror=null; this.src='image_5a9583.jfif';" alt="Foto 4" class="w-full h-36 object-cover rounded-xl">
-            <p class="font-dancing text-pink-300 text-xs mt-1">Compañera de locuras 🥷</p>
-          </div>
-          <div class="glass-card p-2 rounded-2xl transform -rotate-1 hover:rotate-0 transition">
-            <img src="image_5a95c2.jpg" onerror="this.onerror=null; this.src='image_5a95c2.jfif';" alt="Foto 5" class="w-full h-36 object-cover rounded-xl">
-            <p class="font-dancing text-pink-300 text-xs mt-1">Amamos las BBQ 🍗</p>
-          </div>
-          <div class="glass-card p-2 rounded-2xl transform rotate-1 hover:rotate-0 transition">
-            <img src="image_5a99fd.jpg" onerror="this.onerror=null; this.src='image_5a99fd.jfif';" alt="Foto 6" class="w-full h-36 object-cover rounded-xl">
-            <p class="font-dancing text-pink-300 text-xs mt-1">Tu fan N° 1 siempre ✌️</p>
-          </div>
-        </div>
-
-        <button onclick="showTab('carta')" class="bg-gradient-to-r from-pink-600 to-rose-500 text-white px-6 py-2.5 rounded-full text-sm font-medium shadow-lg hover:scale-105 transition">
-          Leer mi carta <i class="fa-solid fa-envelope ml-1"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- 3. CARTA -->
-    <div id="sec-carta" class="tab-content">
-      <div class="glass-card p-6 rounded-3xl space-y-4">
-        <h2 class="text-2xl font-dancing font-bold text-pink-400 flex items-center gap-2">
-          <i class="fa-solid fa-envelope-open-heart"></i> Para mi Awina preciosa:
-        </h2>
-        <div class="space-y-3 text-gray-200 text-xs md:text-sm leading-relaxed font-light max-h-72 overflow-y-auto pr-2">
-          <p>Quería hacerte este regalo especial para recordarte lo infinitamente importante que eres en mi vida. Desde que llegaste, cada día tiene un brillo distinto, más cálido y lleno de sentido.</p>
-          <p>Te amo, awina de mi corazón, te amo demasiado, eres lo mejor que me ha ocurrido estos últimos años. Amo la forma en que me miras, amo la manera en la que me besas; tus besos me desarman. Somos cómplices de todo: cada foto, cada paseo, cada historia quiero seguir vistiéndola a tu lado.</p>
-          <p>En estos 2 años quiero decirte que estoy más que seguro que te quiero en mi vida. Solo quiero que te subas al barco conmigo. ¡NO TE PREOCUPES! Que yo remaré por ti, pero eso sí, mientras lo haga no dejes nunca de demostrarme tu amor, que con cada demostración de cariño tuya me haces sentir vivo y con esperanza de que de barco pasemos a yate. ¡Eso, Brad, así será!</p>
-          <p>Gracias por ser mi refugio, mi compañera de locuras genuinas y mi persona favorita; yo soy tu fan N° 1. Me encuentro escribiendo esto y me siento como un niño queriendo decirle lo mucho que le gusta a la otra niña; no se me viene el mejor léxico, pero sé que al menos de corazón te lo intento decir.</p>
-          <p>Hoy te extrañé demasiado, te vi irte en el taxi tan rápido que no sentí que ni conversé contigo, fue por un bien motivo uu. Oye, tú, mi compañera, con esto quiero decirte que prometo siempre cuidarte, escucharte y amarte en cada momento, en cada paso del camino.</p>
-          <p>Te amo, mi awina preciosa, no te olvides jamás. Gracias por tenerle paciencia a mi memoria y mi TDAH; prometo también ponerle empeño en no dejar que eso te haga pensar que yo no te amo, ¡porque sí te AMOOOOO, TE AMO INFINITAMENTEEEEEEEEEEEEEEEEEE, HARTOO, MUCHOOOO, BASTANTEEEEE, ABUNDAAAANTEEE, EXAGERADOOO, YÁ!</p>
-          <p class="font-semibold text-pink-300">PD: ¡Y pon a cargar el celular antes de irte al trabajo, OK? TE AMO, MI TORMENTA DE ARENA &lt;3</p>
-        </div>
-        <div class="text-right">
-          <button onclick="showTab('razones')" class="bg-gradient-to-r from-pink-600 to-rose-500 text-white px-6 py-2 rounded-full text-xs font-medium shadow-lg">
-            Ver Razones <i class="fa-solid fa-list-check ml-1"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. RAZONES Y CUPÓN ESPECIAL -->
-    <div id="sec-razones" class="tab-content">
-      <div class="glass-card p-6 rounded-3xl space-y-4 text-center">
-        <h2 class="text-2xl font-dancing font-bold text-pink-400"><i class="fa-solid fa-jar"></i> Razones por las que te amo</h2>
-        <div class="space-y-2 text-left text-xs md:text-sm text-gray-200">
-          <div class="p-2.5 bg-pink-950/30 rounded-xl border border-pink-500/20"><i class="fa-solid fa-heart text-pink-500 mr-2"></i> Amo la forma en que me miras y cómo tus besos me desarman.</div>
-          <div class="p-2.5 bg-pink-950/30 rounded-xl border border-pink-500/20"><i class="fa-solid fa-heart text-pink-500 mr-2"></i> Eres mi refugio y mi compañera de locuras genuinas.</div>
-          <div class="p-2.5 bg-pink-950/30 rounded-xl border border-pink-500/20"><i class="fa-solid fa-heart text-pink-500 mr-2"></i> Tu paciencia inmensa con mi memoria y mi TDAH.</div>
-          <div class="p-2.5 bg-pink-950/30 rounded-xl border border-pink-500/20"><i class="fa-solid fa-heart text-pink-500 mr-2"></i> Porque con cada demostración de cariño tuya me haces sentir vivo.</div>
-        </div>
-
-        <div class="mt-4 p-4 bg-gradient-to-r from-pink-900/50 to-purple-900/50 rounded-2xl border border-pink-400/40">
-          <p class="text-xs text-pink-300 font-semibold uppercase tracking-wider">🎟️ Vale Especial de Amor</p>
-          <p class="text-sm text-white mt-1">Válido por: Una salida a comer alitas BBQ, pasear y besos infinitos ❤️</p>
-        </div>
-
-        <button onclick="showTab('pregunta')" class="bg-gradient-to-r from-pink-600 to-rose-500 text-white px-6 py-2.5 rounded-full text-sm font-medium shadow-lg hover:scale-105 transition">
-          Una última pregunta... <i class="fa-solid fa-circle-question ml-1"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- 5. LA PREGUNTA INTERACTIVA -->
-    <div id="sec-pregunta" class="tab-content text-center">
-      <div class="glass-card p-8 rounded-3xl space-y-6 relative overflow-hidden">
-        <div class="text-pink-500 text-5xl animate-pulse">
-          <i class="fa-solid fa-ring"></i>
-        </div>
-        <h2 class="text-2xl font-dancing font-bold text-pink-400">¿Quieres seguir siendo mi compañera de vida y subirte a este barco conmigo? ❤️</h2>
-        <div class="flex justify-center gap-4 items-center relative min-h-[60px]" id="btn-container">
-          <button onclick="responderSi()" class="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-2.5 rounded-full text-sm shadow-lg transform hover:scale-110 transition">
-            ¡SÍ, OBVIO! 💕
-          </button>
-          <button id="btnNo" onmouseover="moverNo()" onclick="moverNo()" class="bg-gray-600 text-white font-bold px-6 py-2.5 rounded-full text-sm absolute transition-all duration-200">
-            No 🙈
-          </button>
-        </div>
-        <div id="mensajeFinal" class="hidden text-pink-300 font-dancing text-2xl font-bold animate-bounce mt-4">
-          ¡SABÍA QUE DIRÍAS QUE SÍ! ¡DE BARCO PASAMOS A YATE! 🛥️💖
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <nav class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 glass-card px-4 py-2 rounded-full flex gap-4 text-pink-400 text-xs shadow-2xl">
-    <button onclick="showTab('inicio')" class="hover:text-white flex flex-col items-center"><i class="fa-solid fa-house"></i>Inicio</button>
-    <button onclick="showTab('recuerdos')" class="hover:text-white flex flex-col items-center"><i class="fa-solid fa-images"></i>Fotos</button>
-    <button onclick="showTab('carta')" class="hover:text-white flex flex-col items-center"><i class="fa-solid fa-envelope"></i>Carta</button>
-    <button onclick="showTab('razones')" class="hover:text-white flex flex-col items-center"><i class="fa-solid fa-list"></i>Razones</button>
-    <button onclick="showTab('pregunta')" class="hover:text-white flex flex-col items-center"><i class="fa-solid fa-heart"></i>Pregunta</button>
-  </nav>
-
-  <script>
-    function showTab(tabName) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.getElementById('sec-' + tabName).classList.add('active');
-    }
-
-    const startDate = new Date('2024-06-30T00:00:00');
-    function updateCounter() {
-      const now = new Date();
-      const diff = now - startDate;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-      document.getElementById('counter').innerHTML = 
-        `<span class="text-pink-400 font-bold">${days}</span> días, <span class="text-pink-400 font-bold">${hours}</span> hrs, <span class="text-pink-400 font-bold">${minutes}</span> min y <span class="text-pink-400 font-bold">${seconds}</span> seg`;
-    }
-    setInterval(updateCounter, 1000);
-    updateCounter();
-
-    function moverNo() {
-      const btnNo = document.getElementById('btnNo');
-      const x = Math.random() * 160 - 80;
-      const y = Math.random() * 100 - 50;
-      btnNo.style.transform = `translate(${x}px, ${y}px)`;
-    }
-
-    function responderSi() {
-      document.getElementById('mensajeFinal').classList.remove('hidden');
-    }
-
-    const audio = document.getElementById('bgMusic');
-    let isPlaying = false;
-
-    function iniciarAudioAutomatico() {
-      if (!isPlaying) {
-        audio.play().then(() => {
-          isPlaying = true;
-          document.getElementById('musicIcon').className = "fa-solid fa-compact-disc animate-spin text-pink-500";
-          document.getElementById('musicText').innerText = "Pausar";
-        }).catch(() => {});
-      }
-    }
-
-    function toggleMusic(event) {
-      if (event) event.stopPropagation();
-      if (!isPlaying) {
-        audio.play();
-        isPlaying = true;
-        document.getElementById('musicIcon').className = "fa-solid fa-compact-disc animate-spin text-pink-500";
-        document.getElementById('musicText').innerText = "Pausar";
-      } else {
-        audio.pause();
-        isPlaying = false;
-        document.getElementById('musicIcon').className = "fa-solid fa-music";
-        document.getElementById('musicText').innerText = "Reproducir";
-      }
-    }
-
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart-particle fa-solid fa-heart';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
-      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-      document.getElementById('particles').appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }
-    setInterval(createHeart, 400);
-  </script>
-</body>
-
-  <!-- Reproductor de Audio -->
-<audio id="bgMusic" loop preload="auto">
-    <source src="musica.mp3" type="audio/mp3">
-</audio>
-
-<!-- Script para reproducir al primer toque -->
-<script>
-    document.addEventListener('click', function() {
-        var music = document.getElementById("bgMusic");
-        if (music && music.paused) {
-            music.play();
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ariel y Maria ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0d020a;
+            color: #ffffff;
+            overflow-x: hidden;
+            user-select: none;
         }
-    }, { once: true });
-</script>
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(255, 42, 117, 0.6);
+        }
+        .glass-card {
+            background: rgba(20, 5, 15, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 42, 117, 0.3);
+            box-shadow: 0 0 40px rgba(255, 42, 117, 0.15);
+        }
+        .tab-button.active {
+            color: #ff2a75;
+            border-bottom: 2px solid #ff2a75;
+        }
+        .heart-particle {
+            position: fixed;
+            color: #ff2a75;
+            pointer-events: none;
+            animation: floatUp linear forwards;
+            z-index: 0;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between p-4 relative">
+
+    <div id="particles"></div>
+
+    <!-- Header / Reproductor de Audio Flotante -->
+    <header class="w-full max-w-md flex justify-between items-center z-10 py-2">
+        <span class="text-xs uppercase tracking-widest text-pink-400 font-semibold">Aniversario Especial</span>
+        <button onclick="toggleMusic(event)" class="bg-pink-950/60 border border-pink-500/40 text-pink-300 px-3 py-1.5 rounded-full text-xs flex items-center gap-2 hover:bg-pink-900/60 transition">
+            <i id="musicIcon" class="fa-solid fa-music">
+            <span id="musicText">Toca para música</span>
+        </button>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="w-full max-w-md my-auto z-10">
+        <div class="glass-card rounded-3xl p-6 text-center space-y-6">
+            <h1 class="text-4xl md:text-5xl font-dancing text-pink-500 glow-text">Ariel & Maria</h1>
+            
+            <div class="relative w-32 h-32 mx-auto rounded-full p-1 bg-gradient-to-tr from-pink-500 to-purple-600 shadow-lg shadow-pink-500/30">
+                <img src="image_321cd7.jpg" alt="Foto Juntos" class="w-full h-full object-cover rounded-full">
+            </div>
+
+            <div class="space-y-2">
+                <h2 class="text-xl font-bold">¡Feliz Aniversario, Mi Amor! ❤️</h2>
+                <p class="text-sm text-gray-300 leading-relaxed">Cada segundo a tu lado es mi momento favorito del día.</p>
+            </div>
+
+            <button class="w-full bg-gradient-to-r from-pink-600 to-purple-600 text-white font-semibold py-3 rounded-xl shadow-lg shadow-pink-600/30 hover:opacity-90 transition">
+                JUNTOS CONSTRUYENDO NUESTRA HISTORIA
+            </button>
+        </div>
+    </main>
+
+    <!-- Elemento de Audio Local -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="musica.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Script de Reproducción Automática al Toque -->
+    <script>
+        var audio = document.getElementById("bgMusic");
+        var isPlaying = false;
+
+        function toggleMusic(event) {
+            if (event) event.stopPropagation();
+            if (!isPlaying) {
+                audio.play();
+                isPlaying = true;
+                document.getElementById('musicIcon').className = "fa-solid fa-compact-disc animate-spin text-pink-500";
+                document.getElementById('musicText').innerText = "Sonando";
+            } else {
+                audio.pause();
+                isPlaying = false;
+                document.getElementById('musicIcon').className = "fa-solid fa-music";
+                document.getElementById('musicText').innerText = "Reproducir";
+            }
+        }
+
+        // Activa la música con el primer toque en cualquier parte de la pantalla
+        document.addEventListener('click', function() {
+            if (audio && audio.paused && !isPlaying) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    document.getElementById('musicIcon').className = "fa-solid fa-compact-disc animate-spin text-pink-500";
+                    document.getElementById('musicText').innerText = "Sonando";
+                }).catch(() => {});
+            }
+        }, { once: true });
+
+        // Partículas de Corazones
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-particle fa-solid fa-heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('particles').appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+</body>
 </html>
