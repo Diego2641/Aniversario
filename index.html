@@ -283,10 +283,13 @@
     setInterval(createHeart, 400);
   </script>
 </body>
-    <audio id="bgMusic" loop preload="auto">
+
+  <!-- Reproductor de Audio -->
+<audio id="bgMusic" loop preload="auto">
     <source src="musica.mp3" type="audio/mp3">
 </audio>
 
+<!-- Script para reproducir al primer toque -->
 <script>
     document.addEventListener('click', function() {
         var music = document.getElementById("bgMusic");
