@@ -29,103 +29,165 @@
             border: 1px solid rgba(255, 42, 117, 0.3);
             box-shadow: 0 0 40px rgba(255, 42, 117, 0.15);
         }
-        .tab-button.active {
-            color: #ff2a75;
-            border-bottom: 2px solid #ff2a75;
+        .tab-content {
+            display: none;
         }
-        .heart-particle {
-            position: fixed;
-            color: #ff2a75;
-            pointer-events: none;
-            animation: floatUp linear forwards;
-            z-index: 0;
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.6s ease-in-out;
         }
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between p-4 relative">
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 relative">
 
-    <div id="particles"></div>
-
-    <!-- Header / Reproductor de Audio Flotante -->
-    <header class="w-full max-w-md flex justify-between items-center z-10 py-2">
-        <span class="text-xs uppercase tracking-widest text-pink-400 font-semibold">Aniversario Especial</span>
-        <button onclick="toggleMusic(event)" class="bg-pink-950/60 border border-pink-500/40 text-pink-300 px-3 py-1.5 rounded-full text-xs flex items-center gap-2 hover:bg-pink-900/60 transition">
-            <i id="musicIcon" class="fa-solid fa-music">
-            <span id="musicText">Toca para música</span>
-        </button>
-    </header>
-
-    <!-- Contenido Principal -->
-    <main class="w-full max-w-md my-auto z-10">
-        <div class="glass-card rounded-3xl p-6 text-center space-y-6">
-            <h1 class="text-4xl md:text-5xl font-dancing text-pink-500 glow-text">Ariel & Maria</h1>
-            
-            <div class="relative w-32 h-32 mx-auto rounded-full p-1 bg-gradient-to-tr from-pink-500 to-purple-600 shadow-lg shadow-pink-500/30">
-                <img src="image_321cd7.jpg" alt="Foto Juntos" class="w-full h-full object-cover rounded-full">
-            </div>
-
-            <div class="space-y-2">
-                <h2 class="text-xl font-bold">¡Feliz Aniversario, Mi Amor! ❤️</h2>
-                <p class="text-sm text-gray-300 leading-relaxed">Cada segundo a tu lado es mi momento favorito del día.</p>
-            </div>
-
-            <button class="w-full bg-gradient-to-r from-pink-600 to-purple-600 text-white font-semibold py-3 rounded-xl shadow-lg shadow-pink-600/30 hover:opacity-90 transition">
-                JUNTOS CONSTRUYENDO NUESTRA HISTORIA
-            </button>
-        </div>
-    </main>
-
-    <!-- Elemento de Audio Local -->
+    <!-- Reproductor de Audio -->
     <audio id="bgMusic" loop preload="auto">
         <source src="musica.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Script de Reproducción Automática al Toque -->
-    <script>
-        var audio = document.getElementById("bgMusic");
-        var isPlaying = false;
+    <!-- Botón de Control de Música -->
+    <button onclick="toggleMusic()" class="fixed top-4 right-4 z-50 glass-card px-4 py-2 rounded-full text-xs md:text-sm font-semibold flex items-center gap-2 hover:bg-pink-900/40 transition">
+        <i id="musicIcon" class="fas fa-music text-pink-400"></i>
+        <span id="musicText">Música 🎵</span>
+    </button>
 
-        function toggleMusic(event) {
-            if (event) event.stopPropagation();
-            if (!isPlaying) {
-                audio.play();
-                isPlaying = true;
-                document.getElementById('musicIcon').className = "fa-solid fa-compact-disc animate-spin text-pink-500";
-                document.getElementById('musicText').innerText = "Sonando";
-            } else {
-                audio.pause();
-                isPlaying = false;
-                document.getElementById('musicIcon').className = "fa-solid fa-music";
-                document.getElementById('musicText').innerText = "Reproducir";
+    <div class="max-w-xl mx-auto w-full my-auto py-8">
+        <!-- Encabezado -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-6xl font-dancing text-pink-500 glow-text mb-2">Ariel & Maria</h1>
+            <p class="text-xs md:text-sm text-pink-200 tracking-widest uppercase">Nuestro Aniversario Especial</p>
+        </header>
+
+        <!-- Tarjeta Principal -->
+        <main class="glass-card rounded-3xl p-6 md:p-8 relative overflow-hidden">
+            
+            <!-- Pestaña 1: Inicio / Contador -->
+            <section id="tab-inicio" class="tab-content active text-center">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-pink-500 shadow-lg shadow-pink-500/30">
+                    <img src="image_321cd7.jpg" alt="Foto Juntos" class="w-full h-full object-cover">
+                </div>
+                <h2 class="text-2xl font-bold mb-2">¡Feliz Aniversario, Mi Amor! ❤️</h2>
+                <p class="text-gray-300 text-sm mb-6">Cada segundo a tu lado es mi momento favorito del día.</p>
+                <div class="inline-block bg-pink-950/50 border border-pink-500/30 px-6 py-3 rounded-2xl">
+                    <p class="text-xs text-pink-300 uppercase font-semibold tracking-wider">Juntos construyendo nuestra historia</p>
+                </div>
+            </section>
+
+            <!-- Pestaña 2: Galería de Fotos -->
+            <section id="tab-fotos" class="tab-content text-center">
+                <h2 class="text-xl font-bold text-pink-400 mb-4 font-dancing text-2xl">Nuestros Momentos 📸</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <img src="image_321cd7.jpg" class="w-full h-36 object-cover rounded-xl border border-pink-500/30">
+                    <img src="image_321cf5.jpg" class="w-full h-36 object-cover rounded-xl border border-pink-500/30">
+                    <img src="image_3ec474.jfif" class="w-full h-36 object-cover rounded-xl border border-pink-500/30">
+                    <img src="image_5a9583.jfif" class="w-full h-36 object-cover rounded-xl border border-pink-500/30">
+                    <img src="image_5a95c2.jfif" class="w-full h-36 object-cover rounded-xl border border-pink-500/30">
+                    <img src="image_5a99fd.jfif" class="w-full h-36 object-cover rounded-xl border border-pink-500/30">
+                </div>
+            </section>
+
+            <!-- Pestaña 3: Carta de Amor -->
+            <section id="tab-carta" class="tab-content">
+                <h2 class="text-2xl font-dancing text-pink-400 mb-4 text-center">Para Maria 💌</h2>
+                <div class="text-sm text-gray-200 leading-relaxed space-y-3 max-h-64 overflow-y-auto pr-2">
+                    <p>Mi vida hermosa,</p>
+                    <p>Hoy celebramos otro paso más en este camino increíble que elegimos recorrer juntos. Gracias por tu sonrisa, por tus abrazos en los días difíciles y por ser mi compañera incondicional.</p>
+                    <p>Amo cada pequeño detalle tuyo, desde la forma en que te ríes hasta la tranquilidad que me das cuando estoy a tu lado. Gracias por hacerme el hombre más feliz.</p>
+                    <p class="text-right font-dancing text-lg text-pink-400">Con todo mi amor, Ariel.</p>
+                </div>
+            </section>
+
+            <!-- Pestaña 4: Pregunta Especial -->
+            <section id="tab-pregunta" class="tab-content text-center">
+                <h2 class="text-2xl font-dancing text-pink-400 mb-4">¿Me concederías una cita esta noche? ✨</h2>
+                <p class="text-xs text-gray-300 mb-6">Prometo sonrisas, buena compañía y mucha comida deliciosa.</p>
+                <div class="flex justify-center items-center gap-4 relative min-h-[60px]">
+                    <button onclick="respuestaSi()" class="bg-pink-600 hover:bg-pink-500 text-white font-bold py-2 px-6 rounded-full shadow-lg shadow-pink-600/40 transition transform active:scale-95">
+                        ¡Sí, me encantaría! 💕
+                    </button>
+                    <button id="btnNo" onmouseover="moverNo()" onclick="moverNo()" class="bg-gray-800 text-gray-400 font-bold py-2 px-6 rounded-full absolute transition-all duration-200">
+                        No
+                    </button>
+                </div>
+                <div id="mensajeExito" class="hidden mt-4 text-pink-300 font-bold text-sm">
+                    ¡Saaaabía que dirías que sí! Nos vemos más tarde mi amor. 😘
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Navegación Inferior -->
+        <nav class="glass-card rounded-2xl mt-4 p-2 flex justify-around items-center">
+            <button onclick="changeTab('tab-inicio')" class="p-3 text-pink-400 hover:text-pink-300 focus:outline-none">
+                <i class="fas fa-heart text-xl"></i>
+            </button>
+            <button onclick="changeTab('tab-fotos')" class="p-3 text-gray-400 hover:text-pink-300 focus:outline-none">
+                <i class="fas fa-images text-xl"></i>
+            </button>
+            <button onclick="changeTab('tab-carta')" class="p-3 text-gray-400 hover:text-pink-300 focus:outline-none">
+                <i class="fas fa-envelope-open-text text-xl"></i>
+            </button>
+            <button onclick="changeTab('tab-pregunta')" class="p-3 text-gray-400 hover:text-pink-300 focus:outline-none">
+                <i class="fas fa-glass-cheers text-xl"></i>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Lógica JavaScript -->
+    <script>
+        // Cambiar pestañas
+        function changeTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            
+            // Intentar reproducir música en cualquier clic de navegación
+            playAudio();
+        }
+
+        // Control de Música
+        const music = document.getElementById("bgMusic");
+        const musicText = document.getElementById("musicText");
+
+        function playAudio() {
+            if (music.paused) {
+                music.play().then(() => {
+                    musicText.innerText = "Sonando 🎵";
+                }).catch(e => {
+                    console.log("Esperando interacción del usuario...");
+                });
             }
         }
 
-        // Activa la música con el primer toque en cualquier parte de la pantalla
-        document.addEventListener('click', function() {
-            if (audio && audio.paused && !isPlaying) {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    document.getElementById('musicIcon').className = "fa-solid fa-compact-disc animate-spin text-pink-500";
-                    document.getElementById('musicText').innerText = "Sonando";
-                }).catch(() => {});
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                musicText.innerText = "Sonando 🎵";
+            } else {
+                music.pause();
+                musicText.innerText = "Pausado 🔇";
             }
+        }
+
+        // Reproducir automáticamente al primer clic en cualquier parte de la pantalla
+        document.addEventListener('click', function() {
+            playAudio();
         }, { once: true });
 
-        // Partículas de Corazones
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart-particle fa-solid fa-heart';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
-            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            document.getElementById('particles').appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
+        // Mover botón "No"
+        function moverNo() {
+            const btn = document.getElementById('btnNo');
+            const x = Math.random() * 160 - 80;
+            const y = Math.random() * 100 - 50;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
         }
-        setInterval(createHeart, 400);
+
+        function respuestaSi() {
+            document.getElementById('mensajeExito').classList.remove('hidden');
+        }
     </script>
 </body>
 </html>
